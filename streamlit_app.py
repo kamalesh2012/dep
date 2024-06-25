@@ -1,13 +1,12 @@
 import streamlit as st
 from datetime import date
 
-# Function to generate bill
 def generate_bill(quantity, cost_per_brick, company_name):
     total_cost = quantity * cost_per_brick
     today = date.today().strftime("%Y-%m-%d")
 
     bill = f"""
-    <div style="padding: 10px; border: 2px solid #000; border-radius: 5px; max-width: 600px; margin: auto; font-family: Arial, sans-serif;">
+    <div id="bill" style="padding: 10px; border: 2px solid #000; border-radius: 5px; max-width: 600px; margin: auto; font-family: Arial, sans-serif;">
         <h2 style="text-align: center;">Invoice</h2>
         <p><strong>Date:</strong> {today}</p>
         <p><strong>Company Name:</strong> {company_name}</p>
@@ -37,9 +36,9 @@ def main():
         print_button_code = '''
         <script>
         function printBill() {
-            var printContents = document.body.innerHTML;
+            var billContents = document.getElementById('bill').innerHTML;
             var originalContents = document.body.innerHTML;
-            document.body.innerHTML = printContents;
+            document.body.innerHTML = billContents;
             window.print();
             document.body.innerHTML = originalContents;
         }
